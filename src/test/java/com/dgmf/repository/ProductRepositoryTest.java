@@ -34,4 +34,18 @@ class ProductRepositoryTest {
         System.out.println(savedProduct.getId());
         System.out.println(savedProduct);
     }
+
+    @Test
+    void updateUsingSaveMethod() {
+        // Find or Retrieve an Entity by Id
+        Long id = 1L;
+        Product product = productRepository.findById(id).get();
+
+        // Update Entity Information
+        product.setProductName("Updated Product 1");
+        product.setProductDescription("Updated Product 1 Description");
+
+        // Save Updated Entity
+        productRepository.save(product);
+    }
 }

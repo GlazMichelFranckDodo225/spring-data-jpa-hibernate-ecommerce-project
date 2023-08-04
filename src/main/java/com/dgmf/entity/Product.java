@@ -45,7 +45,7 @@ public class Product {
     private String productSku;
     @Column(name = "product_name", nullable = false, length = 20)
     private String productName;
-    @Column(name = "product_description", nullable = false, length = 20)
+    @Column(name = "product_description", nullable = false)
     private String productDescription;
     @Column(name = "product_price", nullable = false)
     @Positive
