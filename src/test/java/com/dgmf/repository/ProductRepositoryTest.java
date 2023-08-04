@@ -48,4 +48,10 @@ class ProductRepositoryTest {
         // Save Updated Entity
         productRepository.save(product);
     }
+
+    @Test
+    void findByIdMethod() {
+        Long id = 1L; // Typically, this id comes from the Client
+        Product product = productRepository.findById(id).get();
+    }
 }
