@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,8 +29,10 @@ class ProductRepositoryTest {
                 .isActive(true)
                 .imageUrl("product1.png")
                 .build();
+
         // Save Product
         Product savedProduct = productRepository.save(product);
+
         // Display Product Information
         System.out.println(savedProduct.getId());
         System.out.println(savedProduct);
@@ -53,5 +56,30 @@ class ProductRepositoryTest {
     void findByIdMethod() {
         Long id = 1L; // Typically, this id comes from the Client
         Product product = productRepository.findById(id).get();
+    }
+
+    @Test
+    void saveAllMethod() {
+        // Create 2 Products
+        Product product2 = Product.builder()
+                .productName("Product 2")
+                .productDescription("Product 2")
+                .productSku("100ABCD")
+                .productPrice(new BigDecimal(200))
+                .isActive(true)
+                .imageUrl("product2.png")
+                .build();
+
+        Product product3 = Product.builder()
+                .productName("Product 3")
+                .productDescription("Product 3")
+                .productSku("100ABCDE")
+                .productPrice(new BigDecimal(300))
+                .isActive(true)
+                .imageUrl("product3.png")
+                .build();
+
+        // Save Multiple Products (product2 and product3)
+        productRepository.saveAll(List.of(product2, product3));
     }
 }
