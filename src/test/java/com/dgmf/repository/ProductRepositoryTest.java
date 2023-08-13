@@ -106,4 +106,24 @@ class ProductRepositoryTest {
         // Delete the retrieval Entity
         productRepository.delete(product);
     }
+
+    @Test
+    void deleteAllMethod1() {
+        // Delete all Entities
+        productRepository.deleteAll();
+    }
+
+    @Test
+    void deleteAllMethod2() {
+        // Basically, these "id" comes from the Client
+        Long id1 = 5L;
+        Long id2 = 6L;
+
+        // Find the Entities by "id"
+        Product product1 = productRepository.findById(id1).get();
+        Product product2 = productRepository.findById(id2).get();
+
+        // Delete the specifies Entities
+        productRepository.deleteAll(List.of(product1, product2));
+    }
 }
