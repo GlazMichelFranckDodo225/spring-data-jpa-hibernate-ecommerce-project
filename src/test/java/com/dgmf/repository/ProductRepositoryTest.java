@@ -133,4 +133,14 @@ class ProductRepositoryTest {
 
         System.out.println(count);
     }
+
+    @Test
+    void existsByIdMethod() {
+        // Typically, this "id" comes from the Client
+        // Long id = 1L; // This "id" does not exist into the DB
+        Long id = 8L; // This "id" exists into the DB
+
+        boolean result = productRepository.existsById(id);
+        System.out.println(result);
+    }
 }
