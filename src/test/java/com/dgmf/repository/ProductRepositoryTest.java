@@ -1,15 +1,12 @@
 package com.dgmf.repository;
 
 import com.dgmf.entity.Product;
-import lombok.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 // Load full "ApplicationContext" of the Application in order
 // to be able to inject all the Spring Beans
@@ -87,7 +84,15 @@ class ProductRepositoryTest {
     void findAllMethod() {
         List<Product> products = productRepository.findAll();
 
-        products.forEach(product -> 
+        products.forEach(product ->
                 System.out.println(product.getProductName()));
+    }
+
+    @Test
+    void deleteByIdMethod() {
+        // Basically, this "id" comes from the Client
+        Long id = 1L;
+
+        productRepository.deleteById(id);
     }
 }
