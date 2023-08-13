@@ -82,4 +82,12 @@ class ProductRepositoryTest {
         // Save Multiple Products (product2 and product3)
         productRepository.saveAll(List.of(product2, product3));
     }
+
+    @Test
+    void findAllMethod() {
+        List<Product> products = productRepository.findAll();
+
+        products.forEach(product -> 
+                System.out.println(product.getProductName()));
+    }
 }
