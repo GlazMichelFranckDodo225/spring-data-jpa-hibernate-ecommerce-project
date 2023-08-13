@@ -126,4 +126,11 @@ class ProductRepositoryTest {
         // Delete the specifies Entities
         productRepository.deleteAll(List.of(product1, product2));
     }
+
+    @Test
+    void countMethod() {
+        Long count = productRepository.count();
+
+        System.out.println(count);
+    }
 }
