@@ -52,4 +52,12 @@ public class QueryMethodTest {
 
         products.forEach(product -> System.out.println(product + "\n"));
     }
+
+    @Test
+    void findDistinctByProductNameMethod() {
+        Product product = productRepository
+                .findDistinctByProductName("Product 2 - Name");
+
+        System.out.println(product);
+    }
 }
