@@ -38,12 +38,12 @@ class ProductRepositoryTest {
     @Test
     void updateUsingSaveMethod() {
         // Find or Retrieve an Entity by Id
-        Long id = 1L;
+        Long id = 7L;
         Product product = productRepository.findById(id).get();
 
         // Update Entity Information
-        product.setProductName("Updated Product 1");
-        product.setProductDescription("Updated Product 1 Description");
+        product.setProductName("Product 1 - Name");
+        product.setProductDescription("Product 1 - Description");
 
         // Save Updated Entity
         productRepository.save(product);
