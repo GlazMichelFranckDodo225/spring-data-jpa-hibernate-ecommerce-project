@@ -40,7 +40,7 @@ public class QueryMethodTest {
                         "Product 1 - Description"
                 );
 
-        products.forEach(product -> System.out.println(product + "\n"));
+        products.forEach(product -> System.out.println(product));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class QueryMethodTest {
                         "Product 2 - Description"
                 );
 
-        products.forEach(product -> System.out.println(product + "\n"));
+        products.forEach(product -> System.out.println(product));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class QueryMethodTest {
                 .findByProductPriceGreaterThan(new BigDecimal(400));
 
         products.forEach(product ->
-                        System.out.println(product + "\n")
+                        System.out.println(product)
                 );
     }
 
@@ -78,17 +78,27 @@ public class QueryMethodTest {
                 .findByProductPriceLessThan(new BigDecimal(500));
 
         products.forEach(product ->
-                        System.out.println(product + "\n")
+                        System.out.println(product)
                 );
     }
 
     @Test
     void findByProductNameContainingMethod() {
         List<Product> products = productRepository
-                .findByProductNameContaining("7");
+                .findByProductNameContaining("product");
 
         products.forEach(product ->
                         System.out.println(product)
                 );
     }
+
+//    @Test
+//    void findByProductNameLikeMethod() {
+//        List<Product> products = productRepository
+//                .findByProductNameLike("product");
+//
+//        products.forEach(product ->
+//                        System.out.println(product.getProductName())
+//                );
+//    }
 }
