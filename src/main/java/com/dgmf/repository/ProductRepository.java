@@ -46,10 +46,15 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     */
     Product findDistinctByProductName(String productName);
     /*
-    * Returns the Products whose price are Greater than the
+    * Returns the Products whose price are Greater Than the
     * given price as Method parameter
     */
     List<Product> findByProductPriceGreaterThan(BigDecimal productPrice);
+    /*
+     * Returns the Products whose price are Less Than the
+     * given price as Method parameter
+     */
+    List<Product> findByProductPriceLessThan(BigDecimal productPrice);
 }
 
 

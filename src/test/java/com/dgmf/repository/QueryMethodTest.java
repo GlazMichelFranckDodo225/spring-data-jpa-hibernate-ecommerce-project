@@ -71,4 +71,14 @@ public class QueryMethodTest {
                         System.out.println(product + "\n")
                 );
     }
+
+    @Test
+    void findByProductPriceLessThanMethod() {
+        List<Product> products = productRepository
+                .findByProductPriceLessThan(new BigDecimal(500));
+
+        products.forEach(product ->
+                        System.out.println(product + "\n")
+                );
+    }
 }
