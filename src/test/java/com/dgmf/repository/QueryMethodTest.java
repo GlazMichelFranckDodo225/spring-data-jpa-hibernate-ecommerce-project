@@ -81,4 +81,14 @@ public class QueryMethodTest {
                         System.out.println(product + "\n")
                 );
     }
+
+    @Test
+    void findByProductNameContainingMethod() {
+        List<Product> products = productRepository
+                .findByProductNameContaining("7");
+
+        products.forEach(product ->
+                        System.out.println(product)
+                );
+    }
 }
