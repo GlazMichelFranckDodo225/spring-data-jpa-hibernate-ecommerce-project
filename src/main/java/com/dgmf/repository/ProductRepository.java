@@ -83,6 +83,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             LocalDateTime startDate,
             LocalDateTime endDate
     );
+    /*
+     * Returns Products based on a list of Products given
+     * as Method parameter
+     */
+    List<Product> findByProductNameIn(List<String> productsNames);
 }
 
 
