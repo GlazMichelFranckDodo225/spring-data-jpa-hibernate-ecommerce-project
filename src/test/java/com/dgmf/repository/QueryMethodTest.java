@@ -101,4 +101,17 @@ public class QueryMethodTest {
 //                        System.out.println(product.getProductName())
 //                );
 //    }
+
+    @Test
+    void findByProductPriceBetweenMethod() {
+        List<Product> products =
+                productRepository.findByProductPriceBetween(
+                        new BigDecimal(300),
+                        new BigDecimal(600)
+                );
+
+        products.forEach(product ->
+                        System.out.println(product)
+                );
+    }
 }
