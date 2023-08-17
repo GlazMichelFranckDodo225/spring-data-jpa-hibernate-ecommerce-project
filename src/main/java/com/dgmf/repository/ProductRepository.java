@@ -4,6 +4,7 @@ import com.dgmf.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,14 +66,23 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
      */
     // List<Product> findByProductNameLike(String text); // "%text%"
     /*
-     * Returns Products whose prices are Between "startPrice" and
-     * "endPrice" given as Method parameter ==> Lower terminal and
-     * Upper terminal included
+     * Returns Products based on a Price range whose prices
+     * are Between "startPrice" and "endPrice" given as Method
+     * parameter ==> Lower terminal and Upper terminal included
      */
     List<Product> findByProductPriceBetween(
             BigDecimal startPrice,
             BigDecimal endPrice)
     ;
+    /*
+     * Returns Products based on a Date range whose dates
+     * are Between "startDate" and "endDate" given as Method
+     * parameter ==> Lower terminal and Upper terminal included
+     */
+    List<Product> findByDateCreatedBetween(
+            LocalDateTime startDate,
+            LocalDateTime endDate
+    );
 }
 
 
