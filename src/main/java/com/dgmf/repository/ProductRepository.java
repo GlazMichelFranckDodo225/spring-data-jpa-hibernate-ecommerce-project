@@ -54,22 +54,22 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     /*
      * Returns the Products whose price are Less Than the
      * given price as Method parameter
-     */
+    */
     List<Product> findByProductPriceLessThan(BigDecimal productPrice);
     /*
      * Returns the filtered Product records that match the
      * given text as Method parameter
-     */
+    */
     List<Product> findByProductNameContaining(String text);
     /*
      * Returns Products based on SQL "Like" condition
-     */
+    */
     // List<Product> findByProductNameLike(String text); // "%text%"
     /*
      * Returns Products based on a Price range whose prices
      * are Between "startPrice" and "endPrice" given as Method
      * parameter ==> Lower terminal and Upper terminal included
-     */
+    */
     List<Product> findByProductPriceBetween(
             BigDecimal startPrice,
             BigDecimal endPrice)
@@ -78,7 +78,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
      * Returns Products based on a Date range whose dates
      * are Between "startDate" and "endDate" given as Method
      * parameter ==> Lower terminal and Upper terminal included
-     */
+    */
     List<Product> findByDateCreatedBetween(
             LocalDateTime startDate,
             LocalDateTime endDate
@@ -86,8 +86,18 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     /*
      * Returns Products based on a list of Products given
      * as Method parameter
-     */
+    */
     List<Product> findByProductNameIn(List<String> productsNames);
+    /*
+     * Returns the First 2 Products between all Products Order
+     * By "ProductName" (ASC - Default)
+    */
+    List<Product> findFirst2ByOrderByProductNameAsc();
+    /*
+     * Returns the Top 3 Products between all Products Order
+     * By "ProductPrice" (DESC)
+    */
+    List<Product> findTop3ByOrderByProductPriceDesc();
 }
 
 

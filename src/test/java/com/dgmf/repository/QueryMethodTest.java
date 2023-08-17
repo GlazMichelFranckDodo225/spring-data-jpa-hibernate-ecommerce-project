@@ -149,4 +149,24 @@ public class QueryMethodTest {
                         System.out.println(product)
                 );
     }
+
+    @Test
+    void findFirst2ByOrderByProductNameAscMethod() {
+        List<Product> products = productRepository
+                .findFirst2ByOrderByProductNameAsc();
+
+        products.forEach(product ->
+                        System.out.println(product)
+                );
+    }
+
+    @Test
+    void findTop3ByOrderByProductPriceDesc() {
+        List<Product> products = productRepository
+                .findTop3ByOrderByProductPriceDesc();
+
+        products.forEach(product ->
+                        System.out.println(product)
+                );
+    }
 }
