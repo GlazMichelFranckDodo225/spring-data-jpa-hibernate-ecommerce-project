@@ -20,4 +20,15 @@ public class JPQLQueryTest {
 
         System.out.println(product);
     }
+
+    @Test
+    void findByProductNameOrProductDescriptionJPQLNamedParamMethod() {
+        Product product = productRepository
+                .findByProductNameOrProductDescriptionJPQLNamedParam(
+                        "Product 5",
+                        "Product 5"
+                );
+
+        System.out.println(product);
+    }
 }
