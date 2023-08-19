@@ -2,6 +2,7 @@ package com.dgmf.repository;
 
 import com.dgmf.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -98,6 +99,17 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
      * By "ProductPrice" (DESC)
     */
     List<Product> findTop3ByOrderByProductPriceDesc();
+    /*
+     * Defines JPQL Query using @Query annotation with
+     * "index" or "position" parameters.
+     * We don't have to follow "Naming Convention" because
+     * or @Query annotation
+    */
+    @Query("SELECT p FROM Product p WHERE p.productName = ?1 " +
+            "OR p.productDescription = ?2")
+    Product findByProductNameOrProductDescriptionJPQLIndexParam(
+            String productName, String productDescription
+    );
 }
 
 
