@@ -61,21 +61,21 @@ class ProductRepositoryTest {
     void saveAllMethod() {
         // Create 2 Products
         Product product2 = Product.builder()
-                .productName("Product 6")
-                .productDescription("Product 6")
-                .productSku("100ABCDExwkh314")
-                .productPrice(new BigDecimal(600))
+                .productName("Product 8")
+                .productDescription("Product 8")
+                .productSku("100ABCDEq658f23")
+                .productPrice(new BigDecimal(700))
                 .isActive(true)
-                .imageUrl("product6.png")
+                .imageUrl("product8.png")
                 .build();
 
         Product product3 = Product.builder()
-                .productName("Product 7")
-                .productDescription("Product 7")
-                .productSku("100ABCDEFmsnhg369")
-                .productPrice(new BigDecimal(100))
+                .productName("Product 9")
+                .productDescription("Product 9")
+                .productSku("100ABCDEF2q569f")
+                .productPrice(new BigDecimal(700))
                 .isActive(true)
-                .imageUrl("product7.png")
+                .imageUrl("product9.png")
                 .build();
 
         // Save Multiple Products (product2 and product3)

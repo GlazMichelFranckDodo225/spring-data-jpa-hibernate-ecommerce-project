@@ -9,12 +9,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.NamedQuery;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
+@NamedQuery(
+    name = "Product.findByProductPrice",
+    query = "SELECT p FROM Product p WHERE p.productPrice = ?1"
+)
+@NamedQuery(
+        name = "Product.findByProductSku",
+        query = "SELECT p FROM Product p WHERE p.productSku = :productSku"
+)
 @Table(
         name = "products",
         schema = "ecommerce",
