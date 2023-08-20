@@ -123,15 +123,31 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     );
     /*
      * Defines Native SQL Query using @Query annotation with
-     * "Index" parameters.
-     */
+     * "Index" or "Position" parameters.
+     * Do not forget to use the actual names of the DB columns.
+    */
     @Query(
-            value = "SELECT * FROM products p WHERE p.productName = ?1 " +
-            "OR p.productDescription = ?2",
+            value = "SELECT * FROM products p WHERE p.product_name = ?1 " +
+            "OR p.product_description = ?2",
             nativeQuery = true
     )
     Product findByProductNameOrProductDescriptionSQLIndexParam(
             String productName, String productDescription
+    );
+    /*
+     * Defines Native SQL Query using @Query annotation with
+     * "Named" parameters. No Matter their "Position".
+     * Do not forget to use the actual names of the DB columns.
+    */
+    @Query(
+            value = "SELECT * FROM products p WHERE p.product_name " +
+                    "= :productName OR p.product_description " +
+                    "= :productDescription",
+            nativeQuery = true
+    )
+    Product findByProductNameOrProductDescriptionSQLNamedParam(
+            @Param("productName") String productName,
+            @Param("productDescription") String productDescription
     );
 }
 

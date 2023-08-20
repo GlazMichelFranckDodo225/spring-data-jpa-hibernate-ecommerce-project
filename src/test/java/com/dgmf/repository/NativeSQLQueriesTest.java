@@ -20,4 +20,14 @@ public class NativeSQLQueriesTest {
 
         System.out.println(product);
     }
+
+    @Test
+    void findByProductNameOrProductDescriptionSQLNamedParamMethod() {
+        Product product = productRepository
+                .findByProductNameOrProductDescriptionSQLNamedParam(
+                        "Product 7", "Product 7"
+                );
+
+        System.out.println(product);
+    }
 }
