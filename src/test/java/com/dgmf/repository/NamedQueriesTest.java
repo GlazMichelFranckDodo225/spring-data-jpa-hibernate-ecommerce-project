@@ -29,4 +29,12 @@ public class NamedQueriesTest {
 
         System.out.println(product);
     }
+
+    @Test
+    void NamedJPQLQueryNamedProductNameDescMethod() {
+        List<Product> products = productRepository
+                .findAllOrderByProductNameDesc();
+
+        products.forEach(System.out::println);
+    }
 }

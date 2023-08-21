@@ -152,6 +152,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     // Defines Named JPQL Queries
     List<Product> findByProductPrice(BigDecimal productPrice);
     Product findByProductSku(@Param("productSku") String productSku);
+    List<Product> findAllOrderByProductNameDesc();
 }
 
 
