@@ -159,6 +159,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     //Product findByProductDescription(String productDescription);
     Product findByProductDescription(
             @Param("product_description") String productDescription);
+    @Query(nativeQuery = true)
+    List<Product> findAllOrderByProductNameAsc();
 }
 
 

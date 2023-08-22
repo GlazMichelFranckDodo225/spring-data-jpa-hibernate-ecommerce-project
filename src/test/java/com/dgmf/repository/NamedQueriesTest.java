@@ -46,4 +46,12 @@ public class NamedQueriesTest {
 
         System.out.println(product);
     }
+
+    @Test
+    void findAllOrderByProductNameAscMethod() {
+        List<Product> products = productRepository
+                .findAllOrderByProductNameAsc();
+
+        products.forEach(System.out::println);
+    }
 }

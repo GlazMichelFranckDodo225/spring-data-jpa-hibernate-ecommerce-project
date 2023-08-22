@@ -37,19 +37,23 @@ import java.time.LocalDateTime;
         }
 )
 
-// "Index or "Position" Parameter
-//@NamedNativeQuery(
-//        name = "Product.findByProductDescription",
-//        query = "SELECT * FROM products p WHERE p.product_description = ?1",
-//        resultClass = Product.class
-//)
-
-// "Named" Parameter
-@NamedNativeQuery(
-        name = "Product.findByProductDescription",
-        query = "SELECT * FROM products p WHERE p.product_description = " +
-                ":product_description",
-        resultClass = Product.class
+@NamedNativeQueries(
+        {
+                // "Named" Parameter
+                @NamedNativeQuery(
+                        name = "Product.findByProductDescription",
+                        query = "SELECT * FROM products p WHERE " +
+                                "p.product_description = :product_description",
+                        resultClass = Product.class
+                ),
+                // "Index or "Position" Parameter
+                @NamedNativeQuery(
+                        name = "Product.findAllOrderByProductNameAsc",
+                        query = "SELECT * FROM products p ORDER BY " +
+                                "p.product_name ASC",
+                        resultClass = Product.class
+                )
+        }
 )
 @Table(
         name = "products",
