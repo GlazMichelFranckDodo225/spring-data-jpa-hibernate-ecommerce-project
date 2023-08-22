@@ -37,4 +37,13 @@ public class NamedQueriesTest {
 
         products.forEach(System.out::println);
     }
+
+    @Test
+    void findByProductDescriptionMethod() {
+        Product product = productRepository
+                // .findByProductDescription("Product 2 - Description");
+                .findByProductDescription("Product 1 - Description");
+
+        System.out.println(product);
+    }
 }

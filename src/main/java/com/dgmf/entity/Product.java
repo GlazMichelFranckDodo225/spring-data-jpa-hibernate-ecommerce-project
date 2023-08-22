@@ -36,6 +36,21 @@ import java.time.LocalDateTime;
                 )
         }
 )
+
+// "Index or "Position" Parameter
+//@NamedNativeQuery(
+//        name = "Product.findByProductDescription",
+//        query = "SELECT * FROM products p WHERE p.product_description = ?1",
+//        resultClass = Product.class
+//)
+
+// "Named" Parameter
+@NamedNativeQuery(
+        name = "Product.findByProductDescription",
+        query = "SELECT * FROM products p WHERE p.product_description = " +
+                ":product_description",
+        resultClass = Product.class
+)
 @Table(
         name = "products",
         schema = "ecommerce",

@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.lang.annotation.Native;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -153,6 +154,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByProductPrice(BigDecimal productPrice);
     Product findByProductSku(@Param("productSku") String productSku);
     List<Product> findAllOrderByProductNameDesc();
+    // Defines Named Native SQL Queries
+    @Query(nativeQuery = true)
+    //Product findByProductDescription(String productDescription);
+    Product findByProductDescription(
+            @Param("product_description") String productDescription);
 }
 
 
