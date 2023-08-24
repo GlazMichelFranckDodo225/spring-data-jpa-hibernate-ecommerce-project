@@ -70,13 +70,24 @@ class ProductRepositoryTest {
                 .build();
 
         Product product3 = Product.builder()
-                .productName("Product 9")
-                .productDescription("Product 9")
-                .productSku("100ABCDEF2q569f")
-                .productPrice(new BigDecimal(700))
+                .productName("Product 3")
+                .productDescription("Product 3")
+                .productSku("100ABCDEF2q569fqngt")
+                .productPrice(new BigDecimal(800))
                 .isActive(true)
-                .imageUrl("product9.png")
+                .imageUrl("product3.png")
                 .build();
+
+        Product product10 = Product.builder()
+                .productName("Product 10")
+                .productDescription("Product 10ncbg")
+                .productSku("100ABCDEF2q569f")
+                .productPrice(new BigDecimal(900))
+                .isActive(true)
+                .imageUrl("product10.png")
+                .build();
+
+
 
         // Save Multiple Products (product2 and product3)
         productRepository.saveAll(List.of(product2, product3));
