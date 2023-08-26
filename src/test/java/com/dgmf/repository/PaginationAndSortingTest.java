@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -60,6 +61,26 @@ public class PaginationAndSortingTest {
                 "Is it the First Page ? " + isFirst + "\n" +
                 "Is it the Last Page ? " + isLast + "\n"
         );
+    }
 
+    @Test
+    void sorting() {
+        // Typically, these two fields below come from the Client
+        String sortBy = "productPrice"; // Entity Product field name
+        String sortDir = "desc";
+
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ?
+                Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+
+        // "org.springframework.data.domain.Sort"
+        // Sort Prices By DESC
+        List<Product> products = productRepository
+                // .findAll(Sort.by(sortBy).descending());
+                // .findAll(Sort.by(sortBy)); // ".ascending()" By Default
+                .findAll(sort); // ".ascending()" By Default
+
+        products.forEach(product ->
+                        System.out.println(product)
+                );
     }
 }
