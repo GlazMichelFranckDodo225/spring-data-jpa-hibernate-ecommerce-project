@@ -64,11 +64,12 @@ public class PaginationAndSortingTest {
     }
 
     @Test
-    void sorting() {
+    void sortingBySingleFieldMethod() {
         // Typically, these two fields below come from the Client
         String sortBy = "productPrice"; // Entity Product field name
         String sortDir = "desc";
 
+        // Sort Object
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ?
                 Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
 
@@ -78,6 +79,34 @@ public class PaginationAndSortingTest {
                 // .findAll(Sort.by(sortBy).descending());
                 // .findAll(Sort.by(sortBy)); // ".ascending()" By Default
                 .findAll(sort); // ".ascending()" By Default
+
+        products.forEach(product ->
+                        System.out.println(product)
+                );
+    }
+
+    @Test
+    void sortingByMultipleFieldsMethod() {
+        // Typically, these three fields below come from the Client
+        String sortByProductName = "productName"; // Entity Product field name
+        String sortByProductDescription = "productDescription"; // Entity Product field name
+        String sortDir = "desc";
+
+        // Three Sort Objects
+        Sort sortObjectForProductName = sortDir
+                .equalsIgnoreCase(Sort.Direction.ASC.name()) ?
+                Sort.by(sortByProductName).ascending() :
+                Sort.by(sortByProductName).descending();
+
+        Sort sortObjectForProductDescription = sortDir
+                .equalsIgnoreCase(Sort.Direction.ASC.name()) ?
+                Sort.by(sortByProductDescription).ascending() :
+                Sort.by(sortByProductDescription).descending();
+
+        Sort groupBySort = sortObjectForProductName
+                .and(sortObjectForProductDescription);
+
+        List<Product> products = productRepository.findAll(groupBySort);
 
         products.forEach(product ->
                         System.out.println(product)
