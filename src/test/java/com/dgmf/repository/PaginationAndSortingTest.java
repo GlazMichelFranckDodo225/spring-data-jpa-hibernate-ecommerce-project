@@ -29,14 +29,14 @@ public class PaginationAndSortingTest {
         // Creates a "pageable" Object
         // from ==> "org.springframework.data.domain"
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        // A Page of Products
+        // All Pages
         Page<Product> page = productRepository.findAll(pageable);
         // A List of Products from "page" Object
         List<Product> products = page.getContent();
         // Displays the Products (5 products per page)
         products.forEach(product ->
-                        System.out.println(product)
-                );
+                System.out.println(product)
+        );
 
         // Information about the Page
         // Total Pages
@@ -54,10 +54,10 @@ public class PaginationAndSortingTest {
 
         // Displays Information about the Page
         System.out.println(
-                "Total Pages : " + totalPages + "\n" +
-                "Total elements : " + totalElements + "\n" +
-                "Number of elements per Page : " + numberOfElementsPerPage + "\n" +
-                "Size of the Page : " + size + "\n" +
+                "Total Pages : " + totalPages + " pages" + "\n" +
+                "Total elements : " + totalElements + " products" + "\n" +
+                "Number of elements per Page : " + numberOfElementsPerPage + " products" + "\n" +
+                "Size of the Page : " + size + " products" + "\n" +
                 "Is it the First Page ? " + isFirst + "\n" +
                 "Is it the Last Page ? " + isLast + "\n"
         );
@@ -111,5 +111,57 @@ public class PaginationAndSortingTest {
         products.forEach(product ->
                         System.out.println(product)
                 );
+    }
+
+    @Test
+    void paginationAndSortingTogetherMethod() {
+        // Typically, these fields below come from the Client
+        // Fields for Sorting
+        String sortByProductPrice = "productPrice"; // Entity Product field name
+        String sortDir = "desc";
+        // Fields for Pagination
+        int pageNo = 0; // First page
+        int pageSize = 5; // Five Records per page
+
+        // Sort Object
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ?
+                Sort.by(sortByProductPrice).ascending() :
+                Sort.by(sortByProductPrice).descending();
+
+        // Pageable Object
+        Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
+
+        // All Pages
+        Page<Product> page = productRepository.findAll(pageable);
+        List<Product> products = page.getContent();
+        // Displays the Products (5 products per page)
+        products.forEach(product ->
+                System.out.println(product)
+        );
+
+        // Information about the Page
+        // Total Pages
+        int totalPages = page.getTotalPages();
+        // Total elements
+        Long totalElements = page.getTotalElements();
+        // Number of elements per Page
+        int numberOfElementsPerPage = page.getNumberOfElements();
+        // Size of the Page
+        int size = page.getSize();
+        // Is it the First Page ?
+        boolean isFirst = page.isFirst();
+        // Is it the Last Page ?
+        boolean isLast = page.isLast();
+
+        // Displays Information about the Page
+        System.out.println(
+                "Total Pages : " + totalPages + " pages" + "\n" +
+                "Total elements : " + totalElements + " products" + "\n" +
+                "Number of elements per Page : " + numberOfElementsPerPage + " products" + "\n" +
+                "Size of the Page : " + size + " products" + "\n" +
+                "Order By : " + sortDir.toUpperCase() + "\n" +
+                "Is it the First Page ? " + isFirst + "\n" +
+                "Is it the Last Page ? " + isLast + "\n"
+        );
     }
 }
