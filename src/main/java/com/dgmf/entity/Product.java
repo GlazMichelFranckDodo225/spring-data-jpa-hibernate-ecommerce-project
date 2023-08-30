@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-
 @NamedQueries(
         {
                 @NamedQuery(
