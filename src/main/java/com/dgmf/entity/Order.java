@@ -37,4 +37,9 @@ public class Order {
     // Hibernate will automatically take the current Timestamp of the JVM
     @UpdateTimestamp
     private LocalDateTime lastUpdated;
+    // Foreign Key ==> Column "billing_address_id" of "Order" Entity
+    // Primary Key ==> Column "id" of "Address" Entity
+    @OneToOne
+    @JoinColumn(name = "billing_address_id", referencedColumnName = "id")
+    private Address billingAddress;
 }
