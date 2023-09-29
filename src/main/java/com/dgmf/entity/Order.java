@@ -38,7 +38,7 @@ public class Order {
     @UpdateTimestamp
     private LocalDateTime lastUpdated;
     // Foreign Key ==> Column "billing_address_id" of "Order" Entity
-    // Primary Key ==> Column "id" of "Address" Entity 
+    // Primary Key ==> Column "id" of "Address" Entity
     /*
     @OneToOne(cascade = {
         CascadeType.PERSIST,
