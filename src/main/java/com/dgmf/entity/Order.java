@@ -45,7 +45,6 @@ public class Order {
         CascadeType.REMOVE
     })
     */
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "billing_address_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
     private Address billingAddress;
 }

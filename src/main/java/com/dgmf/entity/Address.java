@@ -38,4 +38,7 @@ public class Address {
     // Hibernate will automatically take the current Timestamp of the JVM
     @UpdateTimestamp
     private LocalDateTime lastUpdated;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    private Order order;
 }
