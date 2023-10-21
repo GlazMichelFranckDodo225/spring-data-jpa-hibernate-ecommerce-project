@@ -10,12 +10,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 @Table(name = "orders")
 public class Order {
     @Id
@@ -37,14 +36,9 @@ public class Order {
     // Hibernate will automatically take the current Timestamp of the JVM
     @UpdateTimestamp
     private LocalDateTime lastUpdated;
-    // Foreign Key ==> Column "billing_address_id" of "Order" Entity
-    // Primary Key ==> Column "id" of "Address" Entity
-    /*
-    @OneToOne(cascade = {
-        CascadeType.PERSIST,
-        CascadeType.REMOVE
-    })
-    */
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
     private Address billingAddress;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    private Set<OrderItem> orderItems = new HashSet<>();
 }
