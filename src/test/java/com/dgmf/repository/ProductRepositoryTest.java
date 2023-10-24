@@ -61,12 +61,12 @@ class ProductRepositoryTest {
     void saveAllMethod() {
         // Create 2 Products
         Product product2 = Product.builder()
-                .productName("Product 8")
-                .productDescription("Product 8")
+                .productName("Product 2")
+                .productDescription("Product 2")
                 .productSku("100ABCDEq658f23")
                 .productPrice(new BigDecimal(700))
                 .isActive(true)
-                .imageUrl("product8.png")
+                .imageUrl("product2.png")
                 .build();
 
         Product product3 = Product.builder()
@@ -90,7 +90,7 @@ class ProductRepositoryTest {
 
 
         // Save Multiple Products (product2 and product3)
-        productRepository.saveAll(List.of(product2, product3));
+        productRepository.saveAll(List.of(product2, product3, product10));
     }
 
     @Test

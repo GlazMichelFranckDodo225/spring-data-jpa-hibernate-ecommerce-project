@@ -42,4 +42,14 @@ public class Order {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     private Set<OrderItem> orderItems = new HashSet<>();
+
+    public BigDecimal getOrderTotalAmount() {
+        BigDecimal amount = new BigDecimal(0.0);
+
+        for(OrderItem orderItem: orderItems) {
+            amount = amount.add(orderItem.getPrice());
+        }
+
+        return amount;
+    }
 }
