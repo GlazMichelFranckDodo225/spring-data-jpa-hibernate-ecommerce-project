@@ -38,7 +38,8 @@ public class Order {
     private LocalDateTime lastUpdated;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
     private Address billingAddress;
-    @OneToMany(cascade = CascadeType.ALL)
+    // Default Fetch Type for "OneToMany" is LAZY
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     private Set<OrderItem> orderItems = new HashSet<>();
 }
