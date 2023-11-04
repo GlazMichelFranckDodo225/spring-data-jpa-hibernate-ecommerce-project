@@ -3,10 +3,6 @@ package com.dgmf.repository;
 import com.dgmf.entity.Address;
 import com.dgmf.entity.Order;
 import com.dgmf.entity.OrderItem;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -74,5 +70,24 @@ public class OneToManyMappingTest {
 
         // Save Order
         orderRepository.save(order);
+    }
+
+    // Fetch Order (Parent Entity) along with
+    // also Fetch its Order Items (Child Entity)
+    @Test
+    void fetchOrderMethod() {
+        Order order = orderRepository.findById(1L).get();
+
+        System.out.println(order.getStatus());
+        // System.out.println(order);
+
+        for (OrderItem orderItem: order.getOrderItems()) {
+            System.out.println(orderItem.getProduct().getProductName());
+        }
+    }
+
+    @Test
+    void deleteOrderMethod() {
+        orderRepository.deleteById(1L);
     }
 }

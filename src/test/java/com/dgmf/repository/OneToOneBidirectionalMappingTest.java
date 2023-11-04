@@ -12,6 +12,8 @@ import java.math.BigDecimal;
 public class OneToOneBidirectionalMappingTest {
     @Autowired
     private AddressRepository addressRepository;
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Test
     void saveAddressMethod() {
@@ -37,7 +39,10 @@ public class OneToOneBidirectionalMappingTest {
     @Test
     void updateAddressMethod() {
         Address address = addressRepository.findById(1L).get();
-        address.setZipCode("91180");
+        address.setCity("Lyon");
+        address.setStreet("14, Grande Rue");
+        address.setZipCode("69008");
+        address.setOrder(orderRepository.findById(1L).get());
         address.getOrder().setStatus("DELIVERED");
 
         addressRepository.save(address);
