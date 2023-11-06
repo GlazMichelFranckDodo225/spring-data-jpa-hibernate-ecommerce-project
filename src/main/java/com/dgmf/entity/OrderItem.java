@@ -23,4 +23,10 @@ public class OrderItem {
     @OneToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    // Default Fetch Type for "OneToMany" is LAZY
+    // OneToMany Bidirectional
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    private Order order;
 }
