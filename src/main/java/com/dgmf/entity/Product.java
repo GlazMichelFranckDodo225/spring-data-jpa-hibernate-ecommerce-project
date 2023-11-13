@@ -100,4 +100,7 @@ public class Product {
     // Hibernate will automatically take the current Timestamp of the JVM
     @UpdateTimestamp
     private LocalDateTime lastUpdated;
+    @ManyToOne
+    @JoinColumn(name = "product_category_id", referencedColumnName = "id")
+    private ProductCategory productCategory;
 }
