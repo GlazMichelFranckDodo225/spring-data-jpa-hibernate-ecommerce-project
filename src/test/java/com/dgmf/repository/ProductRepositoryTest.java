@@ -14,25 +14,27 @@ import java.util.List;
 class ProductRepositoryTest {
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private ProductCategoryRepository productCategoryRepository;
 
     @Test
     void saveMethod() {
         // Create Product
-        Product product = Product.builder()
-                .productName("Product 1")
-                .productDescription("Product 1")
-                .productSku("100ABC")
-                .productPrice(new BigDecimal(100))
-                .isActive(true)
-                .imageUrl("product1.png")
-                .build();
+        Product productA = new Product();
+                productA.setProductName("Product A");
+                productA.setProductDescription("Product A");
+                productA.setProductSku("mdl253qfk");
+                productA.setProductPrice(new BigDecimal(13226));
+                productA.setActive(true);
+                productA.setImageUrl("productA.png");
+                productA.setProductCategory(productCategoryRepository.findById(1L).get());
 
         // Save Product
-        Product savedProduct = productRepository.save(product);
+        Product savedProduct = productRepository.save(productA);
 
         // Display Product Information
         System.out.println(savedProduct.getId());
-        System.out.println(savedProduct);
+        // System.out.println(savedProduct); // fetch.FetchType.LAZY
     }
 
     @Test
@@ -60,37 +62,37 @@ class ProductRepositoryTest {
     @Test
     void saveAllMethod() {
         // Create 2 Products
-        Product product2 = Product.builder()
-                .productName("Product 2")
-                .productDescription("Product 2")
-                .productSku("100ABCDEq658f23")
-                .productPrice(new BigDecimal(700))
-                .isActive(true)
-                .imageUrl("product2.png")
-                .build();
+        Product productB = new Product();
+        productB.setProductName("Product B");
+        productB.setProductDescription("Product B");
+        productB.setProductSku("mdnx3q5s69");
+        productB.setProductPrice(new BigDecimal(32145));
+        productB.setActive(true);
+        productB.setImageUrl("productB.png");
+        productB.setProductCategory(productCategoryRepository.findById(1L).get());
 
-        Product product3 = Product.builder()
-                .productName("Product 3")
-                .productDescription("Product 3")
-                .productSku("100ABCDEF2q569fqngt")
-                .productPrice(new BigDecimal(800))
-                .isActive(true)
-                .imageUrl("product3.png")
-                .build();
+        Product productC = new Product();
+        productC.setProductName("Product C");
+        productC.setProductDescription("Product C");
+        productC.setProductSku("nclod2d1c6q");
+        productC.setProductPrice(new BigDecimal(325831));
+        productC.setActive(true);
+        productC.setImageUrl("productC.png");
+        productC.setProductCategory(productCategoryRepository.findById(1L).get());
 
-        Product product10 = Product.builder()
-                .productName("Product 10")
-                .productDescription("Product 10ncbg")
-                .productSku("100ABCDEF2q569f")
-                .productPrice(new BigDecimal(900))
-                .isActive(true)
-                .imageUrl("product10.png")
-                .build();
+        Product productD = new Product();
+        productD.setProductName("Product D");
+        productD.setProductDescription("Product D");
+        productD.setProductSku("ytmq626cqs");
+        productD.setProductPrice(new BigDecimal(32369));
+        productD.setActive(true);
+        productD.setImageUrl("productD.png");
+        productD.setProductCategory(productCategoryRepository.findById(1L).get());
 
 
 
         // Save Multiple Products (product2 and product3)
-        productRepository.saveAll(List.of(product2, product3, product10));
+        productRepository.saveAll(List.of(productB, productC, productD));
     }
 
     @Test
