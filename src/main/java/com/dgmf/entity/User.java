@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 @Entity
 @Table(
@@ -23,4 +25,33 @@ public class User {
     private String lastName;
     private String email;
     private String password;
+    @ManyToMany(
+            // Whenever we load Users, associated Roles will load also
+            fetch = FetchType.EAGER,
+            // All operations (save, update, delete, etc...) on User will
+            // be implemented on associated Roles also
+            cascade = CascadeType.ALL
+    )
+    // To customize the Join Table (optional)
+    @JoinTable(
+            // Join Table Name
+            name = "users_roles",
+            // Owner Entity (User)
+            joinColumns =
+                @JoinColumn(
+                    // Foreign Key in the Join Table
+                    name = "user_id",
+                    // Reference the User Primary Key "id"
+                    referencedColumnName = "id"
+                ),
+            // Related Entity (Role)
+            inverseJoinColumns =
+                @JoinColumn(
+                    // Foreign Key in the Join Table
+                    name = "role_id",
+                    // Reference the Role Primary Key "id"
+                    referencedColumnName = "id"
+                )
+    )
+    private Set<Role> roles;
 }
