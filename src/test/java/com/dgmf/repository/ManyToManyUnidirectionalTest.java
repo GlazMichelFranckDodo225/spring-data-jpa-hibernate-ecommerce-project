@@ -72,4 +72,11 @@ public class ManyToManyUnidirectionalTest {
         foundUser.getRoles().forEach(role -> System.out.println(role.getName()));
 
     }
+
+    // JUnit Test for Delete User Method
+    @Test
+    @DisplayName("JUnit Test for Delete User Method")
+    void deleteUser() {
+        userRepository.deleteById(1L);
+    }
 }
