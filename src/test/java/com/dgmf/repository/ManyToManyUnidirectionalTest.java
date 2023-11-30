@@ -12,7 +12,7 @@ public class ManyToManyUnidirectionalTest {
     @Autowired
     private UserRepository userRepository;
 
-    // JUnit Test for
+    // JUnit Test for Save User Method
     @Test
     @DisplayName("JUnit Test for Save User Method")
     void saveUser() {
@@ -38,7 +38,7 @@ public class ManyToManyUnidirectionalTest {
         User savedUser = userRepository.save(user);
     }
 
-    // JUnit Test for
+    // JUnit Test for Update User Method
     @Test
     @DisplayName("JUnit Test for Update User Method")
     void updateUser() {
@@ -56,5 +56,20 @@ public class ManyToManyUnidirectionalTest {
 
         // Save Updated User
         User updatedUser = userRepository.save(savedUser);
+    }
+
+    // JUnit Test for Fetch User Method
+    @Test
+    @DisplayName("JUnit Test for Fetch User Method")
+    void fetchUser() {
+        // Retrieve User By Id from the DB
+        User foundUser = userRepository.findById(1L).get();
+
+        // Print User Email
+        System.out.println(foundUser.getEmail());
+
+        // Print User Roles Names
+        foundUser.getRoles().forEach(role -> System.out.println(role.getName()));
+
     }
 }
