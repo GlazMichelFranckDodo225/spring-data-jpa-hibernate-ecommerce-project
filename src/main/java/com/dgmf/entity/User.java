@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
@@ -53,5 +54,5 @@ public class User {
                     referencedColumnName = "id"
                 )
     )
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 }
