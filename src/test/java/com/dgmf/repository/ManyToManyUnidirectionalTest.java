@@ -37,4 +37,24 @@ public class ManyToManyUnidirectionalTest {
         // Save User
         User savedUser = userRepository.save(user);
     }
+
+    // JUnit Test for
+    @Test
+    @DisplayName("JUnit Test for Update User Method")
+    void updateUser() {
+        // Retrieve User By Id from the DB
+        User savedUser = userRepository.findById(1L).get();
+
+        // Update User
+        savedUser.setFirstName("Johnatan");
+        savedUser.setEmail("Johnatandoe@gmail.com");
+
+        // Update User Role
+        Role roleUser = new Role();
+        roleUser.setName("ROLE_USER");
+        savedUser.getRoles().add(roleUser);
+
+        // Save Updated User
+        User updatedUser = userRepository.save(savedUser);
+    }
 }
