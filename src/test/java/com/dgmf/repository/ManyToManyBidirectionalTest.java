@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @SpringBootTest
 public class ManyToManyBidirectionalTest {
     @Autowired
@@ -47,5 +49,24 @@ public class ManyToManyBidirectionalTest {
         // Save the Role "roleAdmin"
         Role savedRole = roleRepository.save(roleAdmin);
 
+    }
+
+    // JUnit Test for Fetch all Roles
+    @Test
+    @DisplayName("JUnit Test for Fetch all Roles")
+    void fetchRoles() {
+        // Retrieved all Roles from the DB
+        List<Role> roles = roleRepository.findAll();
+
+        // Outputs (Nested ForEach)
+        roles.forEach(role -> {
+            // Display Roles Names
+            System.out.println(role.getName());
+            // Display Users Names
+            role.getUsers().forEach(user ->
+                    System.out.println(user.getFirstName())
+                );
+            }
+        );
     }
 }
