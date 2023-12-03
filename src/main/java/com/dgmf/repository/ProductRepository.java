@@ -13,6 +13,27 @@ import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
     /*
+     * Returns a List of Products based on JPQL Search Query Criteria
+     * and Named Parameters (Use Class Names)
+     */
+    @Query("SELECT p FROM Product p WHERE " +
+            "p.productName LIKE CONCAT('%', :query, ''%)" +
+            " OR p.productDescription LIKE CONCAT('%', :query, ''%)"
+    )
+    List<Product> searchProductsJPQLSearchQuery(String query);
+
+    /*
+     * Returns a List of Products based on Native SQL Search Query Criteria
+     * and Named Parameters (Use Table Names)
+     */
+    @Query(value = "SELECT * FROM products p WHERE " +
+            "p.product_name LIKE CONCAT('%', :query, ''%)" +
+            " OR p.product_description LIKE CONCAT('%', :query, ''%)",
+            nativeQuery = true
+    )
+    List<Product> searchProductsNativeSQLSearchQuery(String query);
+    
+    /*
     * Returns the found Product entry by using its name
     * as search criteria. If no Product entry is found,
     * this method returns "null"
@@ -36,7 +57,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     /*
     * Returns the found list of Product entries whose "productName" AND
     * "productDescription" are given as a Method parameter. If no Product
-    * entries is found, this Method returns an empty list.
+    * entry is found, this Method returns an empty list.
     */
     List<Product> findByProductNameAndProductDescription(
             String productName,
@@ -50,12 +71,12 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     */
     Product findDistinctByProductName(String productName);
     /*
-    * Returns the Products whose price are Greater Than the
+    * Returns the Products whose prices are Greater Than the
     * given price as Method parameter
     */
     List<Product> findByProductPriceGreaterThan(BigDecimal productPrice);
     /*
-     * Returns the Products whose price are Less Than the
+     * Returns the Products whose prices are Less Than the
      * given price as Method parameter
     */
     List<Product> findByProductPriceLessThan(BigDecimal productPrice);
@@ -92,12 +113,12 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     */
     List<Product> findByProductNameIn(List<String> productsNames);
     /*
-     * Returns the First 2 Products between all Products Order
+     * Returns the First 2 Products between all Product Orders
      * By "ProductName" (ASC - Default)
     */
     List<Product> findFirst2ByOrderByProductNameAsc();
     /*
-     * Returns the Top 3 Products between all Products Order
+     * Returns the Top 3 Products between all Product Orders
      * By "ProductPrice" (DESC)
     */
     List<Product> findTop3ByOrderByProductPriceDesc();
@@ -138,7 +159,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     /*
      * Defines Native SQL Query using @Query annotation with
      * "Named" parameters. No Matter their "Position".
-     * Do not forget to use the actual names of the DB columns.
+     * Remember to use the actual names of the DB columns.
     */
     @Query(
             value = "SELECT * FROM products p WHERE p.product_name " +
