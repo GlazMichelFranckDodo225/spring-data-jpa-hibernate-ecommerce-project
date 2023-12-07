@@ -17,8 +17,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
      * and Named Parameters (Use Class Names)
      */
     @Query("SELECT p FROM Product p WHERE " +
-            "p.productName LIKE CONCAT('%', :query, ''%)" +
-            " OR p.productDescription LIKE CONCAT('%', :query, ''%)"
+            "p.productName LIKE CONCAT('%', :query, '%')" +
+            " OR p.productDescription LIKE CONCAT('%', :query, '%')"
     )
     List<Product> searchProductsJPQLSearchQuery(String query);
 
