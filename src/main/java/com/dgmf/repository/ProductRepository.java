@@ -32,7 +32,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             nativeQuery = true
     )
     List<Product> searchProductsNativeSQLSearchQuery(String query);
-    
+
     /*
     * Returns the found Product entry by using its name
     * as search criteria. If no Product entry is found,
