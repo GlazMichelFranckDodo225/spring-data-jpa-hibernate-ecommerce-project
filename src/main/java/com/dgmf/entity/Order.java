@@ -48,6 +48,7 @@ public class Order {
     // OneToMany Bidirectional
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "order")
     private Set<OrderItem> orderItems = new HashSet<>();
+    private Long shoppingCartId;
 
     public BigDecimal getOrderTotalAmount() {
         BigDecimal amount = new BigDecimal(0.0);
