@@ -10,6 +10,7 @@ import com.dgmf.repository.OrderRepository;
 import com.dgmf.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -20,23 +21,25 @@ public class OrderServiceImpl implements OrderService {
     private final CreditCardPaymentRepository creditCardPaymentRepository;
 
     @Override
+    @Transactional
     public OrderDtoResponse placeOrder(OrderDtoRequest orderDtoRequest) {
         // Save Order Details
         Order order = orderDtoRequest.getOrder();
         order.setStatus("IN PROGRESS");
         order.setOrderTrackingNumber(UUID.randomUUID().toString());
-        Order savedOrder = orderRepository.save(order);
+        // Order savedOrder = orderRepository.save(order);
+        Order savedOrder = orderRepository.saveAndFlush(order);
 
         // Save Credit Card Payment Details
-        CreditCardPayment creditCardPayment =
-                orderDtoRequest.getCreditCardPayment();
+        CreditCardPayment creditCardPayment = orderDtoRequest.getCreditCardPayment();
+        // Checking Credit Card Payment Type
         if(!creditCardPayment.getType().equals("DEBIT")) {
-            throw new CreditCardPaymentException("Payment Card " +
-                    "Type do not Supported");
+            throw new CreditCardPaymentException("Payment Card Type do not Supported");
         }
         creditCardPayment.setOrderId(order.getId());
-        CreditCardPayment savedCreditCardPayment =
-                creditCardPaymentRepository.save(creditCardPayment);
+        /*CreditCardPayment savedCreditCardPayment = creditCardPaymentRepository.save(creditCardPayment);*/
+        CreditCardPayment savedCreditCardPayment = creditCardPaymentRepository
+                .saveAndFlush(creditCardPayment);
 
         // Send back the Response to the Client
         OrderDtoResponse orderDtoResponse = OrderDtoResponse.builder()
